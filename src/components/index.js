@@ -1,0 +1,6 @@
+export {Form} from './Form'
+export {Header} from './Header'
+export {Input} from './Input'
+export {InputError} from './InputError'
+export {MainContainer} from './MainContainer'
+export {Result} from './Result'
