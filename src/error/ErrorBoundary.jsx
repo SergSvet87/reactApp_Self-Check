@@ -1,7 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 
+import { ErrorFallback } from './ErrorFallback'
 import logger from '../utils/logger'
+import errors from '../utils/errors'
 
 let startDate
 
@@ -15,21 +17,41 @@ class ErrorBoundary extends React.Component {
     return { hasError: true }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     startDate = new Date()
   }
 
-  componentDidCatch(id, error, startDate) {
-    axios
-    .post('http://localhost:3015/errors', logger)
-    .then(({ data }) => {
-      logger.push({ id, error, startDate })
-    })
+  componentDidCatch(
+    idErr,
+    msgError,
+    startDate,
+    idLog,
+    firstNumber,
+    secondNumber,
+    result,
+    msgLog
+  ) {
+    if (msgError) {
+      axios.post('http://localhost:3015/errors', errors).then(({ err }) => {
+        err.push({ idErr, msgError, startDate })
+      })
+    } else {
+      axios.post('http://localhost:3015/logger', logger).then(({ log }) => {
+        log.push({
+          idLog,
+          firstNumber,
+          secondNumber,
+          result,
+          msgLog,
+          startDate,
+        })
+      })
+    }
   }
 
   render() {
     if (this.state.hasError) {
-      return <h1>Something went wrong.</h1>
+      return <ErrorFallback/>
     }
 
     return this.props.children

@@ -2,7 +2,6 @@ import React from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
 import { Form, Header, Input, InputError, MainContainer, Result } from './components/index'
-import {ErrorFallback} from './error/ErrorFallback'
 
 import './App.scss'
 
@@ -22,6 +21,10 @@ function App() {
       setTextInputError('You can not divide by zero!')
     }
 
+    if (+valSecondNumber !== 0) {
+      setTextInputError('')
+    }
+
     setSecondNumber(valSecondNumber)
   }
 
@@ -33,8 +36,9 @@ function App() {
     <MainContainer>
       <Header />
       <ErrorBoundary
-        FallbackComponent={ErrorFallback}
-        onReset={() => window.location.reload()}
+        firstNumber={firstNumber}
+        secondNumber={secondNumber}
+        result={result}
       >
         <Form>
           <Input

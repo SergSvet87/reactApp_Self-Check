@@ -1,5 +1,8 @@
 export const logger = (log) => (log.push({
     id: log.id,
-    msg: log.message,
+    firstNumber: log.firstNumber,
+    secondNumber: log.secondNumber,
+    result: log.result,
+    msgLog: log.message,
     date: log.date,
 }))

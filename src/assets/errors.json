@@ -1,8 +1,18 @@
 {
+  "loggers": [
+    {
+      "id": 1,
+      "firstNumber": 1,
+      "secondNumber": 1,
+      "result": 1,
+      "msgLog": true,
+      "date": "01.12.2022, 12:00"
+    }
+  ],
   "errors": [
     {
       "id": 1,
-      "msg": "Test",
+      "msgError": "Test",
       "date": "01.12.2022, 12:00"
     }
   ]
